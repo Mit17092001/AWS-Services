@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AWS Learning Hub – Master Cloud Services</title>
+  <meta name="description" content="Interactive platform to learn AWS services: S3, EC2, ECS, Lambda, ALB, CloudWatch, RDS and more." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- NAVBAR -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-brand">
+      <span class="aws-logo">☁️</span>
+      <span>AWS Learning Hub</span>
+    </div>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#architecture">Architecture</a></li>
+      <li><a href="#quiz">Quiz</a></li>
+    </ul>
+    <button class="hamburger" id="hamburger">&#9776;</button>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" id="home">
+    <div class="hero-bg"></div>
+    <div class="hero-content">
+      <div class="badge">🚀 Cloud Learning Platform</div>
+      <h1>Master AWS Services</h1>
+      <p>New to the cloud? No problem. This interactive guide breaks down complex AWS services into simple, everyday analogies that any fresher can understand and master.</p>
+      <div class="hero-actions">
+        <a href="#services" class="btn btn-primary">Start Learning</a>
+        <a href="#architecture" class="btn btn-outline">View Architecture</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat"><span class="stat-num">8</span><span>Services</span></div>
+        <div class="stat"><span class="stat-num">40+</span><span>Concepts</span></div>
+        <div class="stat"><span class="stat-num">10</span><span>Quiz Questions</span></div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="cloud-grid" id="cloudGrid"></div>
+    </div>
+  </section>
+
+  <!-- SERVICES GRID -->
+  <section class="section" id="services">
+    <div class="container">
+      <div class="section-header">
+        <h2>AWS Services Overview</h2>
+        <p>Click on any service card to explore its concepts in depth</p>
+      </div>
+      <div class="services-grid" id="servicesGrid"></div>
+    </div>
+  </section>
+
+  <!-- SERVICE DETAIL MODAL -->
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal" id="modal">
+      <button class="modal-close" id="modalClose">&times;</button>
+      <div class="modal-body" id="modalBody"></div>
+    </div>
+  </div>
+
+  <!-- ARCHITECTURE DIAGRAM -->
+  <section class="section section-dark" id="architecture">
+    <div class="container">
+      <div class="section-header">
+        <h2>AWS Reference Architecture</h2>
+        <p>How these services work together in a production system</p>
+      </div>
+      <div class="arch-diagram" id="archDiagram">
+        <div class="arch-layer" id="layer-user">
+          <div class="arch-label">Users / Internet</div>
+          <div class="arch-nodes">
+            <div class="arch-node user-node">👤 Users</div>
+          </div>
+        </div>
+        <div class="arch-arrow">↓ HTTPS</div>
+        <div class="arch-layer" id="layer-alb">
+          <div class="arch-label">Load Balancing</div>
+          <div class="arch-nodes">
+            <div class="arch-node alb-node">⚖️ ALB</div>
+          </div>
+        </div>
+        <div class="arch-arrow">↓ Routes traffic</div>
+        <div class="arch-layer" id="layer-compute">
+          <div class="arch-label">Compute Layer</div>
+          <div class="arch-nodes">
+            <div class="arch-node ec2-node">🖥️ EC2</div>
+            <div class="arch-node ecs-node">🐳 ECS</div>
+            <div class="arch-node lambda-node">⚡ Lambda</div>
+          </div>
+        </div>
+        <div class="arch-arrow">↓ Data access</div>
+        <div class="arch-layer" id="layer-data">
+          <div class="arch-label">Data Layer</div>
+          <div class="arch-nodes">
+            <div class="arch-node s3-node">🪣 S3</div>
+            <div class="arch-node rds-node">🗄️ RDS</div>
+          </div>
+        </div>
+        <div class="arch-arrow">↓ Observability</div>
+        <div class="arch-layer" id="layer-obs">
+          <div class="arch-label">Monitoring</div>
+          <div class="arch-nodes">
+            <div class="arch-node cw-node">📊 CloudWatch</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="arch-journey">
+        <h3>🚀 The Journey of a Request</h3>
+        <div class="journey-grid">
+          <div class="journey-card">
+            <div class="j-icon">👤</div>
+            <h4>1. User Arrival</h4>
+            <p>A user types your link. This sends an <strong>HTTPS request</strong> to AWS.</p>
+          </div>
+          <div class="journey-card">
+            <div class="j-icon">⚖️</div>
+            <h4>2. Traffic Control</h4>
+            <p>The <strong>ALB</strong> acts as traffic police and directs the user to a healthy server.</p>
+          </div>
+          <div class="journey-card">
+            <div class="j-icon">⚙️</div>
+            <h4>3. Logic</h4>
+            <p>Your <strong>Compute Layer</strong> (EC2/ECS/Lambda) runs the code logic for the request.</p>
+          </div>
+          <div class="journey-card">
+            <div class="j-icon">🗄️</div>
+            <h4>4. Data</h4>
+            <p>The app talks to <strong>RDS</strong> for data or <strong>S3</strong> for files. This is where info lives.</p>
+          </div>
+          <div class="journey-card">
+            <div class="j-icon">📊</div>
+            <h4>5. Monitoring</h4>
+            <p><strong>CloudWatch</strong> watches every second to make sure everything is perfect.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- QUIZ -->
+  <section class="section" id="quiz">
+    <div class="container">
+      <div class="section-header">
+        <h2>Test Your Knowledge</h2>
+        <p>Quick quiz to reinforce your AWS learning</p>
+      </div>
+      <div class="quiz-container" id="quizContainer">
+        <div class="quiz-card" id="quizCard">
+          <div class="quiz-progress">
+            <div class="quiz-progress-bar" id="quizProgressBar"></div>
+          </div>
+          <div class="quiz-question" id="quizQuestion"></div>
+          <div class="quiz-options" id="quizOptions"></div>
+          <div class="quiz-feedback" id="quizFeedback"></div>
+          <button class="btn btn-primary" id="quizNext" style="display:none">Next Question →</button>
+        </div>
+        <div class="quiz-result" id="quizResult" style="display:none">
+          <div class="result-emoji" id="resultEmoji"></div>
+          <h3 id="resultTitle"></h3>
+          <p id="resultDesc"></p>
+          <div class="score-display" id="scoreDisplay"></div>
+          <button class="btn btn-primary" id="restartQuiz">Restart Quiz 🔄</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <p>☁️ AWS Learning Hub &nbsp;|&nbsp; Built for cloud learners &nbsp;|&nbsp; 2026</p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
